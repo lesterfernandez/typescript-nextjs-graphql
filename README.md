@@ -4,6 +4,7 @@
 
 - Next.js
 - TypeScript
+- Prisma
 - GraphQL Nexus
 - Apollo Server
 - Apollo Client configured SSR/SSG and CSR
