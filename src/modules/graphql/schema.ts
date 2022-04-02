@@ -5,7 +5,7 @@ import * as types from "./types";
 const schema = makeSchema({
   types,
   contextType: {
-    module: join(process.cwd(), "./types/Context.ts"),
+    module: join(process.cwd(), "./src/types/Context.ts"),
     export: "Context",
   },
   outputs: {

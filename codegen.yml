@@ -1,8 +1,8 @@
 overwrite: true
-schema: "modules/graphql/schema.ts"
+schema: "src/modules/graphql/schema.ts"
 require:
   - ts-node/register
-documents: "modules/graphql/**/*.graphql"
+documents: "src/modules/graphql/**/*.graphql"
 generates:
   generated/graphql.tsx:
     plugins:

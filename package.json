@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "yarn run generate",
+    "build:nexus-typegen": "ts-node --transpile-only src/modules/graphql/schema.ts",
+    "predev": "yarn run build:nexus-typegen && yarn run generate",
     "dev": "next dev",
-    "prebuild": "yarn run generate",
+    "prebuild": "yarn run build:nexus-typegen && yarn run generate",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

@@ -1,5 +1,5 @@
 import type { GetServerSidePropsContext, NextPage } from "next";
-import { TestDocument, useTestQuery } from "../generated/graphql";
+import { TestDocument, useTestQuery } from "../../generated/graphql";
 import {
   addApolloState,
   initializeApollo,
