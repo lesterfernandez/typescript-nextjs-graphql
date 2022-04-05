@@ -15,6 +15,16 @@ export type Scalars = {
   Float: number;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  createAccount?: Maybe<RegisterResponse>;
+};
+
+
+export type MutationCreateAccountArgs = {
+  credentials: LoginCredentials;
+};
+
 export type Query = {
   __typename?: 'Query';
   test?: Maybe<Scalars['Boolean']>;
@@ -23,6 +33,18 @@ export type Query = {
 
 export type QueryTestArgs = {
   bool: Scalars['Boolean'];
+};
+
+export type LoginCredentials = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+  username: Scalars['String'];
+};
+
+export type RegisterResponse = {
+  __typename?: 'registerResponse';
+  error: Scalars['Boolean'];
+  message: Scalars['String'];
 };
 
 export type TestQueryVariables = Exact<{ [key: string]: never; }>;
