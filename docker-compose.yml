@@ -9,5 +9,9 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=prisma
+  cache:
+    image: redis
+    ports:
+      - 5002:6379
 volumes:
   pgdata:
