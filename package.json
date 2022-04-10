@@ -19,7 +19,6 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@prisma/client": "^3.11.1",
-    "@types/cors": "^2.8.12",
     "apollo-server-micro": "^3.6.5",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
@@ -39,6 +38,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.12",
     "@graphql-codegen/cli": "2.6.2",
     "@graphql-codegen/typescript": "2.4.8",
     "@graphql-codegen/typescript-operations": "2.3.5",
