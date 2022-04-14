@@ -5,6 +5,7 @@ import {
   objectType,
 } from "nexus";
 import { createAccount } from "../resolvers/createAccount";
+import { loginAttempt } from "../resolvers/loginAttempt";
 
 export const CreateAccount = extendType({
   type: "Mutation",
@@ -14,6 +15,26 @@ export const CreateAccount = extendType({
       args: { credentials: nonNull(Credentials) },
       resolve: createAccount,
     });
+  },
+});
+
+export const Login = extendType({
+  type: "Mutation",
+  definition: t => {
+    t.field("login", {
+      type: LoginResponse,
+      args: { credentials: nonNull(Credentials) },
+      resolve: loginAttempt,
+    });
+  },
+});
+
+const LoginResponse = objectType({
+  name: "loginResponse",
+  definition: t => {
+    t.nonNull.boolean("error");
+    t.string("message");
+    t.string("username");
   },
 });
 

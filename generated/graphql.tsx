@@ -18,10 +18,16 @@ export type Scalars = {
 export type Mutation = {
   __typename?: 'Mutation';
   createAccount?: Maybe<RegisterResponse>;
+  login?: Maybe<LoginResponse>;
 };
 
 
 export type MutationCreateAccountArgs = {
+  credentials: LoginCredentials;
+};
+
+
+export type MutationLoginArgs = {
   credentials: LoginCredentials;
 };
 
@@ -39,6 +45,13 @@ export type LoginCredentials = {
   email: Scalars['String'];
   password: Scalars['String'];
   username: Scalars['String'];
+};
+
+export type LoginResponse = {
+  __typename?: 'loginResponse';
+  error: Scalars['Boolean'];
+  message?: Maybe<Scalars['String']>;
+  username?: Maybe<Scalars['String']>;
 };
 
 export type RegisterResponse = {
