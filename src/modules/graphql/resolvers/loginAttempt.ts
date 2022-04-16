@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { ValidationError } from "apollo-server-micro";
 import { compare } from "bcrypt";
 import { CookieSerializeOptions } from "next/dist/server/web/types";
 import { FieldResolver } from "nexus";
@@ -11,36 +10,27 @@ export const loginAttempt: FieldResolver<
   "Mutation",
   "login"
 > = async (_, { credentials }, { prisma, res }) => {
-  try {
-    await registrationValidation.validate(credentials);
-    const existingUser = await getExistingUser(credentials, prisma);
+  await registrationValidation.validate(credentials);
+  const existingUser = await getExistingUser(credentials, prisma);
 
-    const encodedToken = await createToken(
-      { username: existingUser.username },
-      {
-        expiresIn: "1m",
-      }
-    );
+  const encodedToken = await createToken(
+    { username: existingUser.username },
+    {
+      expiresIn: "1m",
+    }
+  );
 
-    nookies.set({ res }, "sid", encodedToken, {
-      httpOnly: true,
-      domain: process.env.SERVER_DOMAIN || undefined,
-      maxAge: 60 * 5,
-      sameSite: true,
-    } as CookieSerializeOptions);
+  nookies.set({ res }, "sid", encodedToken, {
+    httpOnly: true,
+    domain: process.env.SERVER_DOMAIN || undefined,
+    maxAge: 60 * 5,
+    sameSite: true,
+    path: "/",
+  } as CookieSerializeOptions);
 
-    return {
-      error: false,
-      username: existingUser.username,
-    };
-  } catch (error) {
-    const errMsg =
-      (error as ValidationError).message || "Login attempt failed!";
-    return {
-      error: true,
-      message: errMsg,
-    };
-  }
+  return {
+    username: existingUser.username,
+  };
 };
 
 const getExistingUser = async (

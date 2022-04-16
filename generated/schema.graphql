@@ -18,12 +18,10 @@ input loginCredentials {
 }
 
 type loginResponse {
-  error: Boolean!
   message: String
   username: String
 }
 
 type registerResponse {
-  error: Boolean!
   message: String!
 }
