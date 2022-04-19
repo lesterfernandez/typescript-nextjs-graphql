@@ -1,11 +1,14 @@
 import { PrismaClient } from "@prisma/client";
-import { MicroRequest } from "apollo-server-micro/dist/types";
-import { ServerResponse } from "http";
-import { NextApiResponse } from "next";
-import { NextIncomingMessage } from "next/dist/server/request-meta";
+import { IncomingMessage, ServerResponse } from "http";
+import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequestCookies } from "next/dist/server/api-utils";
 
 export interface Context {
-  req: MicroRequest | NextIncomingMessage;
+  req:
+    | NextApiRequest
+    | (IncomingMessage & {
+        cookies: NextApiRequestCookies;
+      });
   res: NextApiResponse | ServerResponse;
   prisma: PrismaClient;
 }

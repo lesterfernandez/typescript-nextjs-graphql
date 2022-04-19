@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 if (!process.env.JWT_SECRET) {
   console.warn("NO JWT_SECRET DEFINED!");
@@ -16,6 +16,19 @@ export const createToken = (
       (err, encoded) => {
         if (err) return reject(err);
         return resolve(encoded as string);
+      }
+    );
+  });
+};
+
+export const verifyToken = (token: string) => {
+  return new Promise<JwtPayload>((resolve, reject) => {
+    jwt.verify(
+      token,
+      process.env.JWT_SECRET as string,
+      (err, decoded) => {
+        if (err) return reject(err);
+        return resolve(decoded as JwtPayload);
       }
     );
   });
