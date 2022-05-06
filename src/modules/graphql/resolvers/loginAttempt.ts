@@ -16,14 +16,14 @@ export const loginAttempt: FieldResolver<
   const encodedToken = await createToken(
     { username: existingUser.username },
     {
-      expiresIn: "1m",
+      expiresIn: "7d",
     }
   );
 
   nookies.set({ res }, "sid", encodedToken, {
     httpOnly: true,
     domain: process.env.SERVER_DOMAIN || undefined,
-    maxAge: 60 * 5,
+    maxAge: 60 * 60 * 24 * 7, // 7d
     sameSite: true,
     path: "/",
   } as CookieSerializeOptions);

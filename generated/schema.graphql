@@ -4,12 +4,19 @@
 
 type Mutation {
   createAccount(credentials: loginCredentials!): registerResponse
+  createPost(content: String!): post
   login(credentials: loginCredentials!): loginResponse
 }
 
 type Query {
+  getPosts: [post]
   implicitLogin: implicitLoginResponse
   test(bool: Boolean!): Boolean
+}
+
+type author {
+  memberSince: String
+  username: String
 }
 
 type implicitLoginResponse {
@@ -26,6 +33,11 @@ input loginCredentials {
 type loginResponse {
   message: String
   username: String
+}
+
+type post {
+  author: author
+  content: String
 }
 
 type registerResponse {

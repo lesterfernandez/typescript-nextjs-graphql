@@ -35,6 +35,10 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   Mutation: {};
   Query: {};
+  author: { // root type
+    memberSince?: string | null; // String
+    username?: string | null; // String
+  }
   implicitLoginResponse: { // root type
     loggedIn: boolean; // Boolean!
     username?: string | null; // String
@@ -42,6 +46,10 @@ export interface NexusGenObjects {
   loginResponse: { // root type
     message?: string | null; // String
     username?: string | null; // String
+  }
+  post: { // root type
+    author?: NexusGenRootTypes['author'] | null; // author
+    content?: string | null; // String
   }
   registerResponse: { // root type
     message: string; // String!
@@ -61,11 +69,17 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createAccount: NexusGenRootTypes['registerResponse'] | null; // registerResponse
+    createPost: NexusGenRootTypes['post'] | null; // post
     login: NexusGenRootTypes['loginResponse'] | null; // loginResponse
   }
   Query: { // field return type
+    getPosts: Array<NexusGenRootTypes['post'] | null> | null; // [post]
     implicitLogin: NexusGenRootTypes['implicitLoginResponse'] | null; // implicitLoginResponse
     test: boolean | null; // Boolean
+  }
+  author: { // field return type
+    memberSince: string | null; // String
+    username: string | null; // String
   }
   implicitLoginResponse: { // field return type
     loggedIn: boolean; // Boolean!
@@ -75,6 +89,10 @@ export interface NexusGenFieldTypes {
     message: string | null; // String
     username: string | null; // String
   }
+  post: { // field return type
+    author: NexusGenRootTypes['author'] | null; // author
+    content: string | null; // String
+  }
   registerResponse: { // field return type
     message: string; // String!
   }
@@ -83,11 +101,17 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createAccount: 'registerResponse'
+    createPost: 'post'
     login: 'loginResponse'
   }
   Query: { // field return type name
+    getPosts: 'post'
     implicitLogin: 'implicitLoginResponse'
     test: 'Boolean'
+  }
+  author: { // field return type name
+    memberSince: 'String'
+    username: 'String'
   }
   implicitLoginResponse: { // field return type name
     loggedIn: 'Boolean'
@@ -96,6 +120,10 @@ export interface NexusGenFieldTypeNames {
   loginResponse: { // field return type name
     message: 'String'
     username: 'String'
+  }
+  post: { // field return type name
+    author: 'author'
+    content: 'String'
   }
   registerResponse: { // field return type name
     message: 'String'
@@ -106,6 +134,9 @@ export interface NexusGenArgTypes {
   Mutation: {
     createAccount: { // args
       credentials: NexusGenInputs['loginCredentials']; // loginCredentials!
+    }
+    createPost: { // args
+      content: string; // String!
     }
     login: { // args
       credentials: NexusGenInputs['loginCredentials']; // loginCredentials!

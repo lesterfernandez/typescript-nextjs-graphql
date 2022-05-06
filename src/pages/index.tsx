@@ -1,4 +1,3 @@
-import { Heading } from "@chakra-ui/react";
 import type { GetServerSidePropsContext } from "next";
 import nookies from "nookies";
 import {
@@ -7,6 +6,7 @@ import {
 } from "../../generated/graphql";
 import { initializeApollo } from "../lib/apolloClient";
 import { prisma } from "../lib/prisma";
+import Home from "../modules/components/Home";
 import Register from "../modules/components/login/Register";
 
 interface Props {
@@ -14,12 +14,8 @@ interface Props {
   loggedIn: boolean;
 }
 
-const Home = ({ loggedIn, username }: Props) => {
-  return loggedIn ? (
-    <Heading>Welcome {username}</Heading>
-  ) : (
-    <Register />
-  );
+const Index = ({ loggedIn, username }: Props) => {
+  return loggedIn ? <Home username={username} /> : <Register />;
 };
 
 export const getServerSideProps = async ({
@@ -51,4 +47,4 @@ export const getServerSideProps = async ({
   };
 };
 
-export default Home;
+export default Index;

@@ -1,0 +1,19 @@
+query GetPosts {
+  getPosts {
+    author {
+      username
+      memberSince
+    }
+    content
+  }
+}
+
+mutation CreatePost($content: String!) {
+  createPost(content: $content) {
+    author {
+      username
+      memberSince
+    }
+    content
+  }
+}

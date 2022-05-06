@@ -35,7 +35,9 @@ it("should validate user info correctly", async () => {
             username: "helloworld"
             password: ""
           }
-        )
+        ) {
+          username
+        }
       }
     `,
   });

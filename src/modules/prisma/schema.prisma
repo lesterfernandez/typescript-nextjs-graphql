@@ -11,10 +11,21 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique @db.VarChar(255)
-  username String @unique @db.VarChar(255)
-  passhash String @db.VarChar(255)
+  id          Int      @id @default(autoincrement())
+  email       String   @unique @db.VarChar(255)
+  username    String   @unique @db.VarChar(255)
+  passhash    String   @db.VarChar(255)
+  memberSince DateTime @default(now())
+  posts       Post[]
 
   @@map("users")
+}
+
+model Post {
+  id             Int    @id @default(autoincrement())
+  content        String
+  author         User   @relation(fields: [authorUsername], references: [username])
+  authorUsername String
+
+  @@map("posts")
 }
